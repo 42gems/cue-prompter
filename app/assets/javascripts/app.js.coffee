@@ -82,10 +82,10 @@ $(document).ready ->
   angle = 0
 
   animation = ->
-    moveTransitionable.set [300, angle + Math.PI*2, 2], { duration: 1000, curve: Easing.inOutSine }
-    moveTransitionable.set [600, angle + Math.PI*4, 1], { duration: 1000, curve: Easing.inOutSine }
-    moveTransitionable.set [300, angle + Math.PI*6, 0.5], { duration: 1000, curve: Easing.inOutSine }
-    moveTransitionable.set [0, angle + Math.PI*8, 1], { duration: 1000, curve: Easing.inOutSine }, ->
+    moveTransitionable.set [300, angle + Math.PI*2, 2], { duration: 1000, curve: Easing.outElastic }
+    moveTransitionable.set [600, angle + Math.PI*4, 1], { duration: 1000, curve: Easing.outElastic }
+    moveTransitionable.set [300, angle + Math.PI*6, 0.5], { duration: 1000, curve: Easing.outElastic }
+    moveTransitionable.set [0, angle + Math.PI*8, 1], { duration: 1000, curve: Easing.outElastic }, ->
       angle += Math.PI*8
       animation()
 
