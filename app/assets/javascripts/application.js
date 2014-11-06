@@ -17,5 +17,4 @@
 //= require angular
 //= require famous
 //= require famous-angular
-//= require_tree ./vendor
 //= require_tree .
