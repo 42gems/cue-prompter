@@ -1,0 +1,18 @@
+@import 'bootstrap';
+@import 'font-awesome';
+@import 'famous-angular';
+
+body {
+  background-color: rgb(36, 48, 55);
+}
+#app {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+label{
+  color: white;
+}

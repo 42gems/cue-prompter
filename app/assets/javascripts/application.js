@@ -14,5 +14,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require angular
 //= require famous
+//= require famous-angular
+//= require_tree ./vendor
 //= require_tree .

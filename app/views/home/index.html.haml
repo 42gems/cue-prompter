@@ -1,0 +1,29 @@
+%fa-app(id='app' ng-controller='MainCtrl')
+  %fa-flexible-layout(fa-options='verticalFlexibleLayoutOptions')
+    %fa-flexible-layout(fa-options='flexibleLayoutOptions')
+      %fa-modifier(fa-translate='transitionable.get()')
+        %fa-surface#content(fa-color="'white'" fa-node='prompterSurface')
+          {{ data.content }}
+      %fa-modifier(fa-size="[200, undefined]")
+        %fa-surface(fa-padding="'10px'")
+          %form
+            .form-group
+              %textarea.form-control(ng-model='data.content')
+            .form-group
+              %label Font size
+              %input.form-control(ng-model='data.fontSize' type='number')
+            .form-group
+              %label Speed
+              %input.form-control(ng-model='data.speed' type='number')
+            .btn-group
+              %a.btn.btn-success(ng-click='backward()')
+                %i.fa.fa-backward
+              %a.btn.btn-success(ng-click='togglePlay()')
+                %i.fa(ng-class='currentStateClass()')
+              %a.btn.btn-success(ng-click='stop()')
+                %i.fa.fa-stop
+    %fa-modifier(fa-size="[undefined, 100]")
+      %fa-surface(fa-background-color="'grey'")
+      %fa-modifier(fa-translate='[progressWrapperAlign(),0,0]')
+        %fa-modifier(fa-origin='[.5, .5]' fa-align='[progressAlign(), 0.5]')
+          %fa-surface(fa-background-color="'red'" fa-size="[50,50]")

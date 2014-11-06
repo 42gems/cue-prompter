@@ -40,4 +40,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'angularjs-rails'
 gem 'famous-angular-rails'
+gem 'haml'
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'

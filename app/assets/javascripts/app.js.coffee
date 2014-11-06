@@ -1,92 +1,104 @@
-$(document).ready ->
-  Surface = famous.core.Surface
-  Modifier = famous.core.Modifier
-  Transform = famous.core.Transform
-  Engine = famous.core.Engine
-  StateModifier = famous.modifiers.StateModifier
-  Transitionable = famous.transitions.Transitionable
-  Easing = famous.transitions.Easing
+app = angular.module('prompter', ['famous.angular'])
 
-  context = Engine.createContext()
+app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $timeout) ->
+    $scope.verticalFlexibleLayoutOptions =
+      direction: 1
+      ratios: [1, true]
 
-  surface1 = new Surface
-    size: [100, 100]
-    properties:
-      backgroundColor: 'gray'
-      textAlign: 'center'
-      fontSize: '100px'
-      lineHeight: '100px'
-      borderRadius: '50px'
-    content: '4'
+    $scope.flexibleLayoutOptions =
+      ratios: [1, true]
 
-  surface2 = new Surface
-    size: [100, 100]
-    properties:
-      backgroundColor: 'red'
-      textAlign: 'center'
-      fontSize: '100px'
-      lineHeight: '100px'
-      borderRadius: '50px'
-    content: '2'
+    $scope.$famous = $famous
 
-  originModifier = new Modifier
-    align: [0.5, 0.5]
-    origin: [0.5, 0.5]
-    opacity: 0.8
+    $scope.data =
+      content: 'Replace this with your content!'
+      fontSize: 50
+      speed: 10
+      height: 0
 
-  moveTransitionable = new Transitionable([0, 0, 1])
+    $scope.transitionable = new famous.transitions.Transitionable([0, 0, 0])
 
-  initialTranslateModifier1 = new StateModifier
-    transform: Transform.translate(-300, 0, 0)
+    $scope.adjustPrompterSize = ->
+      setTimeout ( ->
+        surface = $famous.find('#content')[0].renderNode
+        if surface
+          content = surface.getContent()
+          height = $(content).height()
+          surface.setSize [undefined, height]
+          $scope.continueAnimation() if $scope.transitionable.isActive()
+      ), 100
 
-  rotateModifier1 = new Modifier
-    transform: ->
-      Transform.rotateZ(moveTransitionable.get()[1])
+    $scope.getHeight = ->
+      surface = $famous.find('#content')[0].renderNode
+      if surface
+        content = surface.getContent()
+        height = $(content).height()
+        $scope.data.height = height if height
+        height
+      else
+        undefined
 
-  moveModifier1 = new Modifier
-    origin: [0.5, 0.5]
-    transform: ->
-      scale = moveTransitionable.get()[2]
-      yTranslate = - (1-scale) * 100
-      Transform.translate(moveTransitionable.get()[0], yTranslate, scale)
+    $scope.currentStateClass = ->
+      if $scope.transitionable.isActive()
+        'fa-pause'
+      else
+        'fa-play'
 
-  scaleModifier1 = new Modifier
-    transform: ->
-      scale = moveTransitionable.get()[2]
-      Transform.scale(scale, scale, scale)
+    $scope.togglePlay = ->
+      if $scope.transitionable.isActive()
+        $scope.transitionable.halt()
+      else
+        $scope.continueAnimation()
 
-  initialTranslateModifier2 = new StateModifier
-    transform: Transform.translate(300, 0, 0)
+    $scope.backward = ->
+      if $scope.transitionable.isActive()
+        $scope.stop()
+        $scope.continueAnimation()
+      else
+        $scope.transitionable.set([0,0,0])
 
-  rotateModifier2 = new Modifier
-    transform: ->
-      Transform.rotateZ(moveTransitionable.get()[1])
+    $scope.stop = ->
+      if $scope.transitionable.isActive()
+        $scope.transitionable.halt()
+      $scope.transitionable.set([0,0,0])
 
-  moveModifier2 = new Modifier
-    origin: [0.5, 0.5]
-    transform: ->
-      scale = 1/moveTransitionable.get()[2]
-      yTranslate = - (1-scale) * 100
-      Transform.translate(-moveTransitionable.get()[0], yTranslate, scale)
+    $scope.progressAlign = ->
+     1 - $scope.currentCoef()
 
-  scaleModifier2 = new Modifier
-    transform: ->
-      scale = moveTransitionable.get()[2]
-      Transform.scale(1/scale, 1/scale, 1/scale)
+    $scope.currentCoef = ->
+      height = $scope.getHeight()
+      done = $scope.transitionable.get()[1]
+      ( height + done ) / height
 
-  origin = context.add(originModifier)
+    $scope.progressWrapperAlign = ->
+      50 - $scope.progressAlign() * 100
 
-  origin.add(initialTranslateModifier1).add(moveModifier1).add(rotateModifier1).add(scaleModifier1).add(surface1)
-  origin.add(initialTranslateModifier2).add(moveModifier2).add(rotateModifier2).add(scaleModifier2).add(surface2)
+    $scope.$watch $scope.getHeight, $scope.adjustPrompterSize
 
-  angle = 0
+    $scope.$watch 'data.fontSize', ->
+      surface = $famous.find('#content')[0].renderNode
+      surface.setProperties
+        fontSize: $scope.data.fontSize + 'px'
 
-  animation = ->
-    moveTransitionable.set [300, angle + Math.PI*2, 2], { duration: 1000, curve: Easing.outElastic }
-    moveTransitionable.set [600, angle + Math.PI*4, 1], { duration: 1000, curve: Easing.outElastic }
-    moveTransitionable.set [300, angle + Math.PI*6, 0.5], { duration: 1000, curve: Easing.outElastic }
-    moveTransitionable.set [0, angle + Math.PI*8, 1], { duration: 1000, curve: Easing.outElastic }, ->
-      angle += Math.PI*8
-      animation()
+    $scope.$watch 'data.speed', ->
+      $scope.continueAnimation() if $scope.transitionable.isActive()
 
-  animation()
+    $scope.logSize = ->
+      surface = $famous.find('#content')[0].renderNode
+      # surface.setSize([200, 2000])
+      if $scope.transitionable.isActive()
+        $scope.transitionable.halt()
+
+    $scope.animate = ->
+      $scope.transitionable.set([0,0,0])
+      $scope.continueAnimation()
+
+    $scope.continueAnimation = ->
+      $scope.transitionable.halt() if $scope.transitionable.isActive()
+      height = $scope.getHeight()
+      console.log height
+      doneHeight = $scope.transitionable.get()[1]
+      leftHeight = height + doneHeight
+      duration = leftHeight / $scope.data.speed * 1000
+      $scope.transitionable.set([0, -height, 0], { duration: duration })
+  ]
