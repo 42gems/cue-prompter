@@ -23,7 +23,9 @@
               %a.btn.btn-success(ng-click='stop()')
                 %i.fa.fa-stop
     %fa-modifier(fa-size="[undefined, 100]")
-      %fa-surface(fa-background-color="'grey'")
-      %fa-modifier(fa-translate='[progressWrapperAlign(),0,0]')
-        %fa-modifier(fa-origin='[.5, .5]' fa-align='[progressAlign(), 0.5]')
-          %fa-surface(fa-background-color="'red'" fa-size="[50,50]")
+      %fa-surface.footer-background(fa-background-color="'grey'")
+      %fa-modifier(fa-translate='[0,0,0]')
+        %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 10]" fa-opacity='.5')
+          %fa-surface(fa-background-color="'red'")
+        %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 10]" fa-opacity='.5')
+          %fa-surface(fa-background-color="'black'")

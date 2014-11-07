@@ -8,8 +8,6 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
     $scope.flexibleLayoutOptions =
       ratios: [1, true]
 
-    $scope.$famous = $famous
-
     $scope.data =
       content: 'Replace this with your content!'
       fontSize: 50
@@ -62,16 +60,17 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
         $scope.transitionable.halt()
       $scope.transitionable.set([0,0,0])
 
-    $scope.progressAlign = ->
-     1 - $scope.currentCoef()
-
     $scope.currentCoef = ->
       height = $scope.getHeight()
       done = $scope.transitionable.get()[1]
       ( height + done ) / height
 
-    $scope.progressWrapperAlign = ->
-      50 - $scope.progressAlign() * 100
+    $scope.progressBarSize = ->
+      surface = $famous.find('.footer-background')[0].renderNode
+      if surface.getSize()
+        (1 - $scope.currentCoef()) * surface.getSize()[0]
+      else
+        0
 
     $scope.$watch $scope.getHeight, $scope.adjustPrompterSize
 
@@ -82,16 +81,6 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
 
     $scope.$watch 'data.speed', ->
       $scope.continueAnimation() if $scope.transitionable.isActive()
-
-    $scope.logSize = ->
-      surface = $famous.find('#content')[0].renderNode
-      # surface.setSize([200, 2000])
-      if $scope.transitionable.isActive()
-        $scope.transitionable.halt()
-
-    $scope.animate = ->
-      $scope.transitionable.set([0,0,0])
-      $scope.continueAnimation()
 
     $scope.continueAnimation = ->
       $scope.transitionable.halt() if $scope.transitionable.isActive()
