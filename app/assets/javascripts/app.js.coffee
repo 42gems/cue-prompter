@@ -8,6 +8,9 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
     $scope.flexibleLayoutOptions =
       ratios: [1, true]
 
+    $scope.footerFlexibleLayoutOptions =
+      ratios: [true, 1, true]
+
     $scope.data =
       content: 'Replace this with your content!'
       fontSize: 50
@@ -66,11 +69,14 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
       ( height + done ) / height
 
     $scope.progressBarSize = ->
-      surface = $famous.find('.footer-background')[0].renderNode
-      if surface.getSize()
-        (1 - $scope.currentCoef()) * surface.getSize()[0]
+      if $scope.fullProgressBarSize()
+        (1 - $scope.currentCoef()) * $scope.fullProgressBarSize()[0]
       else
         0
+
+    $scope.fullProgressBarSize = ->
+      surface = $famous.find('.footer-background')[0].renderNode
+      surface.getSize()
 
     $scope.$watch $scope.getHeight, $scope.adjustPrompterSize
 
@@ -85,9 +91,31 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
     $scope.continueAnimation = ->
       $scope.transitionable.halt() if $scope.transitionable.isActive()
       height = $scope.getHeight()
-      console.log height
       doneHeight = $scope.transitionable.get()[1]
       leftHeight = height + doneHeight
       duration = leftHeight / $scope.data.speed * 1000
       $scope.transitionable.set([0, -height, 0], { duration: duration })
+
+    # events
+    #
+    $scope.progressBarMouseSync = new famous.inputs.MouseSync()
+
+    $scope.updateByProgressBar = (obj) ->
+      height = $scope.getHeight()
+      fullBarWidth = $scope.fullProgressBarSize()
+      if height && fullBarWidth
+        fullBarWidth = fullBarWidth[0]
+        offsetBar = (obj.clientX - 100)
+        if offsetBar >= 0 && offsetBar <= fullBarWidth
+          ratio = offsetBar / fullBarWidth
+          shift = height * ratio
+          if $scope.transitionable.isActive()
+            $scope.transitionable.halt()
+            $scope.transitionable.set([0, -shift, 0])
+            $scope.continueAnimation()
+          else
+            $scope.transitionable.set([0, -shift, 0])
+
+    $scope.progressBarMouseSync.on 'start', $scope.updateByProgressBar
+    $scope.progressBarMouseSync.on 'update', $scope.updateByProgressBar
   ]

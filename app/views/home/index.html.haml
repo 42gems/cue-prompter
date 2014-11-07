@@ -23,9 +23,20 @@
               %a.btn.btn-success(ng-click='stop()')
                 %i.fa.fa-stop
     %fa-modifier(fa-size="[undefined, 100]")
-      %fa-surface.footer-background(fa-background-color="'grey'")
-      %fa-modifier(fa-translate='[0,0,0]')
-        %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 10]" fa-opacity='.5')
-          %fa-surface(fa-background-color="'red'")
-        %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 10]" fa-opacity='.5')
-          %fa-surface(fa-background-color="'black'")
+      %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
+        %fa-modifier(fa-size="[100, undefined]")
+          %fa-surface(fa-color="'#ddd'" fa-background-color="'rgb(36, 48, 55)'")
+            Share
+        %fa-modifier
+          %fa-surface.footer-background(fa-background-color="'rgb(36, 48, 55)'")
+          %fa-modifier(fa-translate='[0,0,0]')
+            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 10]" fa-opacity='.5')
+              %fa-surface(fa-background-color="'red'" fa-pipe-to='progressBarMouseSync')
+            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 10]")
+              %fa-modifier(fa-size='[15, 15]' fa-align='[1, 0.5]' fa-origin='[0.5, 0.5]' fa-opacity='1')
+                %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
+              %fa-modifier(fa-opacity='.5')
+                %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
+        %fa-modifier(fa-size="[100, undefined]" fa-background-color="'rgb(36, 48, 55)'")
+          %fa-surface(fa-color="'#ddd'")
+            Dark/Light
