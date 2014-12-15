@@ -1,6 +1,6 @@
-app = angular.module('prompter', ['famous.angular'])
+app = angular.module('prompter', ['famous.angular', 'ui.bootstrap', 'templates'])
 
-app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $timeout) ->
+app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', '$modal', ($scope, $famous, $timeout, $modal) ->
     $scope.verticalFlexibleLayoutOptions =
       direction: 1
       ratios: [1, true]
@@ -118,4 +118,22 @@ app.controller 'MainCtrl', ['$scope', '$famous', '$timeout', ($scope, $famous, $
 
     $scope.progressBarMouseSync.on 'start', $scope.updateByProgressBar
     $scope.progressBarMouseSync.on 'update', $scope.updateByProgressBar
+  
+    $scope.openModal = ->
+      modalInstance = $modal.open
+        templateUrl: "share_button_modal.html"
+        controller: "ShareButtonModalInstanceCtrl"
+
+      modalInstance.result.then ->
+        console.log 'Done!'
+      , ->
+        console.log "Modal dismissed"
+
   ]
+
+app.controller "ShareButtonModalInstanceCtrl", ($scope, $modalInstance) ->
+  $scope.done = ->
+    $modalInstance.close "Done!"
+
+  $scope.cancel = ->
+    $modalInstance.dismiss "Cancelled"

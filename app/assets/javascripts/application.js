@@ -17,4 +17,7 @@
 //= require angular
 //= require famous
 //= require famous-angular
+//= require ui-bootstrap
+//= require angular-rails-templates
+//= require_tree ../templates
 //= require_tree .
