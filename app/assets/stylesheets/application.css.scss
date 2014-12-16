@@ -29,19 +29,30 @@ label {
   }
 }
 
-/* Share button
+/* Buttons
 ****************************/
-.btn-share {
+.btn-custom{
   display: inline-block;
   width: 48px;
   height: 48px;
-
-  background-image: image-url('share_this_icon_2.png');
   background-size: 48px 48px;
-
-  &:active, &.active {
+  
+  &.btn-share {
     background-image: image-url('share_this_icon_2.png');
-    box-shadow: inset 7px 7px 5px 0px rgba(50, 50, 50, 0.15);
+
+    &:active, &.active {
+      background-image: image-url('share_this_icon_2.png');
+      box-shadow: inset 7px 7px 5px 0px rgba(50, 50, 50, 0.15);
+    }
   }
+
+  &.btn-dimmer {
+    background-image: image-url('lightbulb_2.png');
+
+    &:active, &.active {
+      background-image: image-url('lightbulb_2.png');
+    }
+  }
+
 }
 

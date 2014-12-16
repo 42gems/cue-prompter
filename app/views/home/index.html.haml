@@ -26,7 +26,7 @@
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
         %fa-modifier(fa-size="[100, undefined]")
           %fa-surface(fa-color="'#ddd'" fa-background-color="'rgb(36, 48, 55)'")
-            .btn.btn-share(ng-click='openModal()')
+            .btn.btn-custom.btn-share(ng-click='openModal()')
         %fa-modifier
           %fa-surface.footer-background(fa-background-color="'rgb(36, 48, 55)'")
           %fa-modifier(fa-translate='[0,0,0]')
@@ -39,4 +39,4 @@
                 %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
         %fa-modifier(fa-size="[100, undefined]" fa-background-color="'rgb(36, 48, 55)'")
           %fa-surface(fa-color="'#ddd'")
-            Dark/Light
+            .btn.btn-custom.btn-dimmer()
