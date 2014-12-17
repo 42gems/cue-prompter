@@ -98,6 +98,10 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
     surface = $famous.find('.footer-background')[0].renderNode
     surface.getSize()
 
+  $scope.getSharerSize = ->
+    surface = $famous.find('#sharer')[0].renderNode
+    surface.getSize()
+
   $scope.$watch $scope.getHeight, $scope.adjustPrompterSize
 
   $scope.$watch 'data.fontSize', ->
@@ -123,9 +127,10 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
   $scope.updateByProgressBar = (obj) ->
     height = $scope.getHeight()
     fullBarWidth = $scope.fullProgressBarSize()
+    sharerWidth  = $scope.getSharerSize()[0]
     if height && fullBarWidth
       fullBarWidth = fullBarWidth[0]
-      offsetBar = (obj.clientX - 100)
+      offsetBar = (obj.clientX - sharerWidth)
       if offsetBar >= 0 && offsetBar <= fullBarWidth
         ratio = offsetBar / fullBarWidth
         shift = height * ratio
