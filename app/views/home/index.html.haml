@@ -1,9 +1,16 @@
 %fa-app(id='app' ng-controller='MainCtrl')
   %fa-flexible-layout(fa-options='verticalFlexibleLayoutOptions')
+    
+    / main content
     %fa-flexible-layout(fa-options='flexibleLayoutOptions')
+      
+      %fa-surface(fa-color="'white'" fa-node='prompterSurface')
+        / Place for ads
+      
       %fa-modifier(fa-translate='transitionable.get()')
         %fa-surface#content(fa-color="'white'" fa-node='prompterSurface')
           {{ data.content }}
+      
       %fa-modifier(fa-size="[200, undefined]")
         %fa-surface(fa-padding="'10px'")
           %form
@@ -11,10 +18,10 @@
               %textarea.form-control(ng-model='data.content')
             .form-group
               %label Font size
-              %input.form-control(ng-model='data.fontSize' type='number')
+              %input(ng-model="data.fontSize" type="range" min="6" max="128")
             .form-group
               %label Speed
-              %input.form-control(ng-model='data.speed' type='number')
+              %input(ng-model="data.speed" type="range" min="1" max="401" step="10")
             .btn-group
               %a.btn.btn-success(ng-click='backward()')
                 %i.fa.fa-backward
@@ -22,21 +29,33 @@
                 %i.fa(ng-class='currentStateClass()')
               %a.btn.btn-success(ng-click='stop()')
                 %i.fa.fa-stop
+
+    / footer
     %fa-modifier(fa-size="[undefined, 100]")
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
+        
+        / share button
         %fa-modifier(fa-size="[100, undefined]")
           %fa-surface(fa-color="'#ddd'" fa-background-color="'rgb(36, 48, 55)'")
             .btn.btn-custom.btn-share(ng-click='openModal()')
+        
+        / controls bar
         %fa-modifier
           %fa-surface.footer-background(fa-background-color="'rgb(36, 48, 55)'")
+          / progress bar
           %fa-modifier(fa-translate='[0,0,0]')
+            / background
             %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 10]" fa-opacity='.5')
-              %fa-surface(fa-background-color="'red'" fa-pipe-to='progressBarMouseSync')
+              %fa-surface(fa-background-color="'white'" fa-pipe-to='progressBarMouseSync')
             %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 10]")
+              / filled background
+              %fa-modifier(fa-opacity='.5')
+                %fa-surface(fa-background-color="'blue'" fa-pipe-to='progressBarMouseSync')
+              / pointer
               %fa-modifier(fa-size='[15, 15]' fa-align='[1, 0.5]' fa-origin='[0.5, 0.5]' fa-opacity='1')
                 %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
-              %fa-modifier(fa-opacity='.5')
-                %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
+        
+        / dimmer
         %fa-modifier(fa-size="[100, undefined]" fa-background-color="'rgb(36, 48, 55)'")
           %fa-surface(fa-color="'#ddd'")
             .btn.btn-custom.btn-dimmer()

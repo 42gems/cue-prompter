@@ -4,7 +4,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
     ratios: [1, true]
 
   $scope.flexibleLayoutOptions =
-    ratios: [1, true]
+    ratios: [1, 3, 1]
 
   $scope.footerFlexibleLayoutOptions =
     ratios: [true, 1, true]

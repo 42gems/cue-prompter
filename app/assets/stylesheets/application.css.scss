@@ -2,9 +2,10 @@
 @import 'font-awesome';
 @import 'famous-angular';
 
-body {
-  background-color: rgb(36, 48, 55);
-}
+/* Alltogether
+****************************/
+body  { background-color: rgb(36, 48, 55); }
+label { color: white; }
 
 #app {
   position: fixed;
@@ -12,10 +13,6 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-label {
-  color: white;
 }
 
 .iconset {
@@ -53,6 +50,5 @@ label {
       background-image: image-url('lightbulb_2.png');
     }
   }
-
 }
 
