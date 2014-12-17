@@ -1,6 +1,9 @@
 %fa-app(id='app' ng-controller='MainCtrl')
+  / background
+  %fa-surface(fa-background-color='mode.dark.background')
+
+  / body
   %fa-flexible-layout(fa-options='verticalFlexibleLayoutOptions')
-    
     / main content
     %fa-flexible-layout(fa-options='flexibleLayoutOptions')
       
@@ -35,27 +38,28 @@
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
         
         / share button
-        %fa-modifier(fa-size="[100, undefined]")
-          %fa-surface(fa-color="'#ddd'" fa-background-color="'rgb(36, 48, 55)'")
+        %fa-modifier(fa-align='[0.01, 0.45]')
+          %fa-surface(fa-color="'#ddd'")
             .btn.btn-custom.btn-share(ng-click='openModal()')
         
         / controls bar
         %fa-modifier
-          %fa-surface.footer-background(fa-background-color="'rgb(36, 48, 55)'")
+          %fa-modifier(fa-align='[0, 0.1]')
+            %fa-surface.footer-background(fa-options="bar.backgroundOptions")
           / progress bar
           %fa-modifier(fa-translate='[0,0,0]')
             / background
-            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 10]" fa-opacity='.5')
+            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 8]" fa-opacity='.5')
               %fa-surface(fa-background-color="'white'" fa-pipe-to='progressBarMouseSync')
-            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 10]")
+            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 8]")
               / filled background
               %fa-modifier(fa-opacity='.5')
-                %fa-surface(fa-background-color="'blue'" fa-pipe-to='progressBarMouseSync')
+                %fa-surface(fa-background-color="'#003A59'" fa-pipe-to='progressBarMouseSync')
               / pointer
               %fa-modifier(fa-size='[15, 15]' fa-align='[1, 0.5]' fa-origin='[0.5, 0.5]' fa-opacity='1')
-                %fa-surface(fa-background-color="'black'" fa-pipe-to='progressBarMouseSync')
+                %fa-surface(fa-options="bar.pointerOptions" fa-pipe-to='progressBarMouseSync')
         
         / dimmer
-        %fa-modifier(fa-size="[100, undefined]" fa-background-color="'rgb(36, 48, 55)'")
+        %fa-modifier(fa-align='[0.8, 0.45]')
           %fa-surface(fa-color="'#ddd'")
             .btn.btn-custom.btn-dimmer()

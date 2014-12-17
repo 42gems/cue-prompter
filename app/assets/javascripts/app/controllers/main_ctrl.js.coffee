@@ -7,13 +7,31 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
     ratios: [1, 3, 1]
 
   $scope.footerFlexibleLayoutOptions =
-    ratios: [true, 1, true]
+    ratios: [1, 3, 1]
 
   $scope.data =
     content: 'Replace this with your content!'
     fontSize: 50
     speed: 10
     height: 0
+
+  $scope.mode =
+    dark:
+      background: '#243037'
+    light:
+      background: '#F0EAD5'
+
+  $scope.bar = 
+    backgroundOptions:
+      size: [undefined, 80]
+      properties:
+        borderRadius: '20px'
+        background: '#0F1417'
+        border: '2px solid #001F30'
+    pointerOptions:
+      properties:
+        borderRadius: '8px'
+        background: '#03080A'
 
   $scope.transitionable = new famous.transitions.Transitionable([0, 0, 0])
 
