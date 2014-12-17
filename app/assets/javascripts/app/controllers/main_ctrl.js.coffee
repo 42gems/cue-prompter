@@ -18,8 +18,12 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
   $scope.mode =
     dark:
       background: '#243037'
+      color: 'white'
     light:
       background: '#F0EAD5'
+      color: 'black'
+  
+  $scope.mode.current = $scope.mode.dark
 
   $scope.bar = 
     backgroundOptions:
@@ -144,3 +148,9 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
       console.log 'Done!'
     , ->
       console.log "Modal dismissed"
+
+  $scope.toggleMode = ->
+    $scope.mode.current = if $scope.mode.current is $scope.mode.dark
+      $scope.mode.light
+    else
+      $scope.mode.dark

@@ -1,29 +1,29 @@
 %fa-app(id='app' ng-controller='MainCtrl')
   / background
-  %fa-surface(fa-background-color='mode.dark.background')
+  %fa-surface(fa-background-color='mode.current.background')
 
   / body
   %fa-flexible-layout(fa-options='verticalFlexibleLayoutOptions')
     / main content
     %fa-flexible-layout(fa-options='flexibleLayoutOptions')
       
-      %fa-surface(fa-color="'white'" fa-node='prompterSurface')
+      %fa-surface(fa-color="mode.current.color" fa-node='prompterSurface')
         / Place for ads
       
       %fa-modifier(fa-translate='transitionable.get()')
-        %fa-surface#content(fa-color="'white'" fa-node='prompterSurface')
+        %fa-surface#content(fa-color="mode.current.color" fa-node='prompterSurface')
           {{ data.content }}
       
       %fa-modifier(fa-size="[200, undefined]")
-        %fa-surface(fa-padding="'10px'")
+        %fa-surface(fa-padding="'10px'" fa-color='mode.current.color')
           %form
             .form-group
               %textarea.form-control(ng-model='data.content')
             .form-group
-              %label Font size
+              Font size
               %input(ng-model="data.fontSize" type="range" min="6" max="128")
             .form-group
-              %label Speed
+              Speed
               %input(ng-model="data.speed" type="range" min="1" max="401" step="10")
             .btn-group
               %a.btn.btn-success(ng-click='backward()')
@@ -62,4 +62,4 @@
         / dimmer
         %fa-modifier(fa-align='[0.8, 0.45]')
           %fa-surface(fa-color="'#ddd'")
-            .btn.btn-custom.btn-dimmer()
+            .btn.btn-custom.btn-dimmer(ng-click='toggleMode()')
