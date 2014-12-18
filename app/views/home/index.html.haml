@@ -37,10 +37,15 @@
     %fa-modifier(fa-size="[undefined, 100]")
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
         
-        / share button
-        %fa-modifier(fa-align='[0.01, 0.45]')
-          %fa-surface(fa-color="'#ddd'" id='sharer')
-            .btn.btn-custom.btn-share(ng-click='openModal()')
+        %fa-view(ng-controller='SharedButtonsCtrl')
+          %fa-modifier
+            %fa-modifier(fa-size="[36, 36]" fa-translate="box.position.get()" ng-repeat="box in sharedButtons.boxes")
+              %fa-surface
+                %div(ng-bind-html="renderHtml(box.content)")
+          / share button
+          %fa-modifier(fa-align='[0, 0.45]')
+            %fa-surface(fa-color="'#ddd'" id='sharer')
+              .btn.btn-custom.btn-share(ng-click='toggleShared()')
         
         / controls bar
         %fa-modifier
@@ -60,6 +65,6 @@
                 %fa-surface(fa-options="bar.pointerOptions" fa-pipe-to='progressBarMouseSync')
         
         / dimmer
-        %fa-modifier(fa-align='[0.8, 0.45]')
+        %fa-modifier(fa-align='[0.81, 0.45]')
           %fa-surface(fa-color="'#ddd'" id='dimmer')
             .btn.btn-custom.btn-dimmer(ng-click='toggleMode()')

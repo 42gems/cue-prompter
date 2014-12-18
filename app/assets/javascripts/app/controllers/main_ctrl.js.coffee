@@ -1,4 +1,4 @@
-app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
+app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
   $scope.verticalFlexibleLayoutOptions =
     direction: 1
     ratios: [1, true]
@@ -143,16 +143,6 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, $modal) ->
 
   $scope.progressBarMouseSync.on 'start', $scope.updateByProgressBar
   $scope.progressBarMouseSync.on 'update', $scope.updateByProgressBar
-
-  $scope.openModal = ->
-    modalInstance = $modal.open
-      templateUrl: "share_button_modal.html"
-      controller: "ShareButtonModalInstanceCtrl"
-
-    modalInstance.result.then ->
-      console.log 'Done!'
-    , ->
-      console.log "Modal dismissed"
 
   $scope.toggleMode = ->
     $scope.mode.current = if $scope.mode.current is $scope.mode.dark
