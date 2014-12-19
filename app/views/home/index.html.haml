@@ -14,9 +14,9 @@
         %fa-surface#content(fa-color="mode.current.color" fa-node='prompterSurface')
           {{ data.content }}
       
-      %fa-modifier(fa-size="[200, undefined]")
+      %fa-modifier
         %fa-surface(fa-padding="'10px'" fa-color='mode.current.color')
-          %form
+          %form.pull-right#control-panel
             .form-group
               %textarea.form-control(ng-model='data.content')
             .form-group
@@ -37,14 +37,14 @@
     %fa-modifier(fa-size="[undefined, 100]")
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
         
-        / icons
+        / social buttons
         %fa-view(ng-controller='SharedButtonsCtrl')
           %fa-modifier(fa-size="[36, 36]" fa-translate="box.position.get()" ng-repeat="box in sharedButtons.boxes")
             %fa-surface
               %div(ng-bind-html="renderHtml(box.content)")
-          / share toggle button
+          / toggle button
           %fa-modifier(fa-align='[0, 0.45]')
-            %fa-surface(fa-color="'#ddd'" id='sharer')
+            %fa-surface(id='sharer')
               .btn.btn-custom.btn-share(ng-click='toggleShared()')
         
         / controls bar
@@ -65,6 +65,6 @@
                 %fa-surface(fa-options="bar.pointerOptions" fa-pipe-to='progressBarMouseSync')
         
         / dimmer
-        %fa-modifier(fa-align='[0.81, 0.45]')
-          %fa-surface(fa-color="'#ddd'" id='dimmer')
-            .btn.btn-custom.btn-dimmer(ng-click='toggleMode()')
+        %fa-modifier(fa-align='[0, 0.45]')
+          %fa-surface(id='dimmer')
+            .btn.btn-custom.btn-dimmer.pull-right(ng-click='toggleMode()')

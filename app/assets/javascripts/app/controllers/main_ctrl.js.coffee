@@ -49,7 +49,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
         $scope.continueAnimation() if $scope.transitionable.isActive()
     ), 100
 
-  $scope.getHeight = ->
+  $scope.getContentHeight = ->
     surface = $famous.find('#content')[0].renderNode
     if surface
       content = surface.getContent()
@@ -84,7 +84,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
     $scope.transitionable.set([0,0,0])
 
   $scope.currentCoef = ->
-    height = $scope.getHeight()
+    height = $scope.getContentHeight()
     done = $scope.transitionable.get()[1]
     ( height + done ) / height
 
@@ -102,7 +102,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
     surface = $famous.find('#sharer')[0].renderNode
     surface.getSize()
 
-  $scope.$watch $scope.getHeight, $scope.adjustPrompterSize
+  $scope.$watch $scope.getContentHeight, $scope.adjustPrompterSize
 
   $scope.$watch 'data.fontSize', ->
     surface = $famous.find('#content')[0].renderNode
@@ -114,7 +114,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
 
   $scope.continueAnimation = ->
     $scope.transitionable.halt() if $scope.transitionable.isActive()
-    height = $scope.getHeight()
+    height = $scope.getContentHeight()
     doneHeight = $scope.transitionable.get()[1]
     leftHeight = height + doneHeight
     duration = leftHeight / $scope.data.speed * 1000
@@ -125,7 +125,7 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
   $scope.progressBarMouseSync = new famous.inputs.MouseSync()
 
   $scope.updateByProgressBar = (obj) ->
-    height = $scope.getHeight()
+    height = $scope.getContentHeight()
     fullBarWidth = $scope.fullProgressBarSize()
     sharerWidth  = $scope.getSharerSize()[0]
     if height && fullBarWidth
