@@ -37,12 +37,12 @@
     %fa-modifier(fa-size="[undefined, 100]")
       %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
         
+        / icons
         %fa-view(ng-controller='SharedButtonsCtrl')
-          %fa-modifier
-            %fa-modifier(fa-size="[36, 36]" fa-translate="box.position.get()" ng-repeat="box in sharedButtons.boxes")
-              %fa-surface
-                %div(ng-bind-html="renderHtml(box.content)")
-          / share button
+          %fa-modifier(fa-size="[36, 36]" fa-translate="box.position.get()" ng-repeat="box in sharedButtons.boxes")
+            %fa-surface
+              %div(ng-bind-html="renderHtml(box.content)")
+          / share toggle button
           %fa-modifier(fa-align='[0, 0.45]')
             %fa-surface(fa-color="'#ddd'" id='sharer')
               .btn.btn-custom.btn-share(ng-click='toggleShared()')

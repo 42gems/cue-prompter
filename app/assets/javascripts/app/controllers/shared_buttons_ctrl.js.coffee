@@ -13,10 +13,10 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
   ]
 
   i = 0
-  while i < 3
+  while i < contents.length
     box =
       curve: 'outElastic'
-      position: new famous.transitions.Transitionable([-36, -10-(i * 36), 0])
+      position: new famous.transitions.Transitionable([-48, -10-(i * 36), 0])
       content: contents[i]
     $scope.sharedButtons.boxes.push(box)
     i++
@@ -35,7 +35,7 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
     i = 0
     while i < $scope.sharedButtons.boxes.length
       box = $scope.sharedButtons.boxes[i]
-      box.position.set [-36, -10-(i * 36), 0],
+      box.position.set [-48, -10-(i * 36), 0],
         duration: 100
       i++
     $scope.sharedButtons.status = 'closed'
