@@ -49,19 +49,19 @@
         
         / controls bar
         %fa-modifier
-          %fa-modifier(fa-align='[0, 0.1]')
+          %fa-modifier(fa-align='[0, 0.5]')
             %fa-surface.footer-background(fa-options="bar.backgroundOptions")
           / progress bar
-          %fa-modifier(fa-translate='[0,0,0]')
+          %fa-modifier(fa-translate='[0,20,0]')
             / background
-            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 8]" fa-opacity='.5')
+            %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 6]" fa-opacity='.4')
               %fa-surface(fa-background-color="'white'" fa-pipe-to='progressBarMouseSync')
             %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[progressBarSize(), 8]")
               / filled background
-              %fa-modifier(fa-opacity='.5')
-                %fa-surface(fa-background-color="'#003A59'" fa-pipe-to='progressBarMouseSync')
+              %fa-modifier
+                %fa-surface(fa-options='bar.progressBarOptions' fa-pipe-to='progressBarMouseSync')
               / pointer
-              %fa-modifier(fa-size='[15, 15]' fa-align='[1, 0.5]' fa-origin='[0.5, 0.5]' fa-opacity='1')
+              %fa-modifier(fa-size='[15, 15]' fa-align='[1, 0.5]' fa-origin='[0.5, 0.5]')
                 %fa-surface(fa-options="bar.pointerOptions" fa-pipe-to='progressBarMouseSync')
         
         / dimmer

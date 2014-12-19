@@ -27,15 +27,21 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
 
   $scope.bar = 
     backgroundOptions:
-      size: [undefined, 80]
+      size: [undefined, 40]
       properties:
-        borderRadius: '20px'
         background: '#0F1417'
         border: '2px solid #001F30'
+        borderRadius: '10px'
     pointerOptions:
       properties:
-        borderRadius: '8px'
         background: '#03080A'
+        border: '4px solid black'
+        borderRadius: '8px'
+    progressBarOptions:
+      properties:
+        background: '#003A59'
+        borderTop:    '2px solid rgba(4, 3, 8, 0.75)'
+        borderBottom: '2px solid rgba(4, 3, 8, 0.75)'
 
   $scope.transitionable = new famous.transitions.Transitionable([0, 0, 0])
 
