@@ -1,6 +1,7 @@
 app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
-
   Easing = $famous['famous/transitions/Easing'];
+  IconWidth  = 48
+  IconHeight = 36
 
   $scope.sharedButtons = 
     boxes: []
@@ -15,8 +16,9 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
   i = 0
   while i < contents.length
     box =
+      size: [IconWidth, IconHeight]
       curve: 'outElastic'
-      position: new famous.transitions.Transitionable([-48, -10-(i * 36), 0])
+      position: new famous.transitions.Transitionable([-IconWidth, -10-(i * IconHeight), 0])
       content: contents[i]
     $scope.sharedButtons.boxes.push(box)
     i++
@@ -25,7 +27,7 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
     i = 0
     while i < $scope.sharedButtons.boxes.length
       box = $scope.sharedButtons.boxes[i]
-      box.position.set [0, -10-(i * 36), 0],
+      box.position.set [0, -10-(i * IconHeight), 0],
         curve: Easing[box.curve]
         duration: 500
       i++
@@ -35,7 +37,7 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
     i = 0
     while i < $scope.sharedButtons.boxes.length
       box = $scope.sharedButtons.boxes[i]
-      box.position.set [-48, -10-(i * 36), 0],
+      box.position.set [-IconWidth, -10-(i * IconHeight), 0],
         duration: 100
       i++
     $scope.sharedButtons.status = 'closed'

@@ -35,11 +35,11 @@
 
     / footer
     %fa-modifier(fa-size="[undefined, 100]")
-      %fa-flexible-layout(fa-options='footerFlexibleLayoutOptions')
+      %fa-flexible-layout(fa-options='flexibleLayoutOptions')
         
         / social buttons
         %fa-view(ng-controller='SharedButtonsCtrl')
-          %fa-modifier(fa-size="[36, 36]" fa-translate="box.position.get()" ng-repeat="box in sharedButtons.boxes")
+          %fa-modifier(ng-repeat="box in sharedButtons.boxes" fa-size="box.size" fa-translate="box.position.get()")
             %fa-surface
               %div(ng-bind-html="renderHtml(box.content)")
           / toggle button
@@ -47,12 +47,12 @@
             %fa-surface(id='sharer')
               .btn.btn-custom.btn-share(ng-click='toggleShared()')
         
-        / controls bar
-        %fa-modifier
+        / bar
+        %fa-modifier(ng-controller='ProgressBarCtrl')
           %fa-modifier(fa-align='[0, 0.5]')
             %fa-surface.footer-background(fa-options="bar.backgroundOptions")
           / progress bar
-          %fa-modifier(fa-translate='[0,20,0]')
+          %fa-modifier(fa-translate='[0, 20, 0]')
             / background
             %fa-modifier(fa-origin='[0, .5]' fa-align='[0, 0.5]' fa-size="[undefined, 6]" fa-opacity='.4')
               %fa-surface(fa-background-color="'white'" fa-pipe-to='progressBarMouseSync')
@@ -67,4 +67,4 @@
         / dimmer
         %fa-modifier(fa-align='[0, 0.45]')
           %fa-surface(id='dimmer')
-            .btn.btn-custom.pull-right(ng-click='toggleMode()' class='{{mode.current.dimmer}}')
+            .btn.btn-custom.pull-right(class='{{mode.current.dimmer}}' ng-click='toggleMode()')
