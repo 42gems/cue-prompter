@@ -19,9 +19,11 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout) ->
     dark:
       background: '#243037'
       color: 'white'
+      dimmer: 'btn-dimmer-light'
     light:
       background: '#F0EAD5'
       color: 'black'
+      dimmer: 'btn-dimmer-dark'
   
   $scope.mode.current = $scope.mode.dark
 

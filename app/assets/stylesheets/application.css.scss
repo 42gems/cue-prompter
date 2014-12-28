@@ -38,20 +38,34 @@ label { color: white; }
   background-size: 48px 48px;
   background-repeat: no-repeat;
   
+  &:hover{
+    transition: transform 0.3s ease;
+    transform: rotate(-360deg);
+  };
+
   &.btn-share {
     background-image: image-url('share_red.png');
     
     &:active, &.active {
-      background-image: image-url('share_red.png');
+      background-image: image-url('share_red_pressed.png');
       box-shadow: none;
     }
   }
   
-  &.btn-dimmer {
+  &.btn-dimmer-dark {
     background-image: image-url('bulb.png');
     
     &:active, &.active {
-      background-image: image-url('bulb.png');
+      background-image: image-url('bulb_pressed.png');
+      box-shadow: none;
+    }
+  }
+
+  &.btn-dimmer-light {
+    background-image: image-url('bulb_light.png');
+    
+    &:active, &.active {
+      background-image: image-url('bulb_light_pressed.png');
       box-shadow: none;
     }
   }
