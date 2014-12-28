@@ -1,4 +1,6 @@
 app.controller 'ProgressBarCtrl', ($scope, $famous, Transitionable) ->
+  $scope.transitionable = Transitionable
+  $scope.progressBarMouseSync = new famous.inputs.MouseSync()
 
   $scope.bar = 
     backgroundOptions:
@@ -17,9 +19,6 @@ app.controller 'ProgressBarCtrl', ($scope, $famous, Transitionable) ->
         background: '#003A59'
         borderTop:    '2px solid rgba(4, 3, 8, 0.75)'
         borderBottom: '2px solid rgba(4, 3, 8, 0.75)'
-
-  $scope.transitionable = Transitionable.transitionable
-  $scope.progressBarMouseSync = new famous.inputs.MouseSync()
 
   $scope.currentCoef = ->
     height = $scope.getContentHeight()

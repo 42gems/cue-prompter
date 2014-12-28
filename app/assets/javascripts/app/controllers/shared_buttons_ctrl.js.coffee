@@ -8,8 +8,8 @@ app.controller 'SharedButtonsCtrl', ($scope, $famous, $sce) ->
     status: 'closed'
 
   contents = [
-    '<a id="fb" class="icon" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcue-prompter.42gems.co%2F"></a>'
     '<a id="gplus" class="icon" target="_blank" href="https://plus.google.com/share?url=http%3A%2F%2Fcue-prompter.42gems.co%2F"></a>'
+    '<a id="fb" class="icon" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fcue-prompter.42gems.co%2F"></a>'
     '<a id="twitter" class="icon" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fcue-prompter.42gems.co%2F&text=Nice+cue-prompter!"></a>'
   ]
 

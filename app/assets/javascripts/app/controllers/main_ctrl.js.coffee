@@ -1,29 +1,15 @@
-app.controller 'MainCtrl', ($scope, $famous, $timeout, Transitionable) ->
+app.controller 'MainCtrl', ($scope, $famous, $timeout, Transitionable, Data, Mode) ->
+  $scope.transitionable = Transitionable
+  $scope.data = Data
+  $scope.mode = Mode
+  $scope.mode.current = $scope.mode.dark
+
   $scope.verticalFlexibleLayoutOptions =
     direction: 1
     ratios: [1, true]
 
   $scope.flexibleLayoutOptions =
     ratios: [1, 3, 1]
-
-  $scope.data =
-    content: 'Replace this with your content!'
-    fontSize: 50
-    speed: 10
-    height: 0
-
-  $scope.mode =
-    dark:
-      background: '#243037'
-      color: 'white'
-      dimmer: 'btn-dimmer-light'
-    light:
-      background: '#F0EAD5'
-      color: 'black'
-      dimmer: 'btn-dimmer-dark'
-  
-  $scope.mode.current = $scope.mode.dark
-  $scope.transitionable = Transitionable.transitionable
 
   $scope.getContentHeight = ->
     surface = $famous.find('#content')[0].renderNode
@@ -52,30 +38,6 @@ app.controller 'MainCtrl', ($scope, $famous, $timeout, Transitionable) ->
         surface.setSize [undefined, height]
         $scope.continueAnimation() if $scope.transitionable.isActive()
     ), 100
-
-  $scope.currentStateClass = ->
-    if $scope.transitionable.isActive()
-      'fa-pause'
-    else
-      'fa-play'
-
-  $scope.togglePlay = ->
-    if $scope.transitionable.isActive()
-      $scope.transitionable.halt()
-    else
-      $scope.continueAnimation()
-
-  $scope.backward = ->
-    if $scope.transitionable.isActive()
-      $scope.stop()
-      $scope.continueAnimation()
-    else
-      $scope.transitionable.set([0,0,0])
-
-  $scope.stop = ->
-    if $scope.transitionable.isActive()
-      $scope.transitionable.halt()
-    $scope.transitionable.set([0,0,0])
 
   $scope.$watch $scope.getContentHeight, $scope.adjustPrompterSize
 
